@@ -1,0 +1,49 @@
+Q. Largest Perimeter Triangle
+Given an integer array nums, return the largest perimeter of a triangle with a non-zero area, formed from three of these lengths. If it is impossible to form any triangle of a non-zero area, return 0
+
+Example 1:
+Input: nums = [2,1,2]
+Output: 5
+Explanation: You can form a triangle with three side lengths: 1, 2, and 2.
+Example 2:
+
+Input: nums = [1,2,1,10]
+Output: 0
+Explanation: 
+You cannot use the side lengths 1, 1, and 2 to form a triangle.
+You cannot use the side lengths 1, 1, and 10 to form a triangle.
+You cannot use the side lengths 1, 2, and 10 to form a triangle.
+As we cannot use any three side lengths to form a triangle of non-zero area, we return 0.
+ 
+
+Constraints:
+
+3 <= nums.length <= 104
+1 <= nums[i] <= 106
+////////////////////////////////////////////////////////////////////Solve/////////////////////////////////////
+class Solution {
+    fun largestPerimeter(nums: IntArray): Int {
+       
+       // sort in descending order to check largest possible triangle first .
+       nums.sortDescending()
+
+       //check each possible triplet starting from the largest values
+
+       for(i in 0 until nums.size - 2){
+        val a = nums[i]    //largest side
+        val b = nums[i+1]
+        val c = nums[i+2]
+        // For a valid triangle: sum of two smaller sides > largest side
+        // Since a >= b >= c, we only need to check b + c > a
+        if (b + c > a) {
+            return a + b + c
+        }
+
+       }
+         // No valid triangle found
+        return 0
+
+
+        
+    }
+}
